@@ -1,4 +1,4 @@
-from urllib import request, parse
+import urllib
 from photo import Photo
 from tt import tweet
 import mongoengine
@@ -20,7 +20,7 @@ if not FLICKR_KEY or not TT_CONSUMER or not TT_SECRET:
 mongoengine.connect('capybara')
 
 def get_flickr_photos(page = 1):
-    r = request.urlopen("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=%s&tags=capybara&format=json&nojsoncallback=1&page=%s" % (FLICKR_KEY, page))
+    r = urllib.urlopen("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=%s&tags=capybara&format=json&nojsoncallback=1&page=%s" % (FLICKR_KEY, page))
     return json.loads(r.read())
 
 def make_photo_url(farm, server, id, secret):

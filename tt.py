@@ -1,5 +1,5 @@
 from twitter import *
-from urllib import request
+import urllib
 import os
 
 TT_CONSUMER = os.environ.get("TWITTER_CAPYBARA_CONSUMER_KEY", False)
@@ -16,7 +16,7 @@ auth = OAuth(oauth_token, oauth_secret, TT_CONSUMER, TT_SECRET)
 tt = Twitter(auth=auth)
 
 def tweet(img_url):
-    img_read = request.urlopen(img_url).read()
+    img_read = urllib.urlopen(img_url).read()
     t_upload = Twitter(domain="upload.twitter.com", auth=auth)
     img_id = t_upload.media.upload(media=img_read)["media_id_string"]
     return tt.statuses.update(status="", media_ids=img_id)

@@ -16,4 +16,5 @@ Post capybara photos on Twitter
 If your photo was posted and you want to remove, please do not mark as spam, just send me a DM and I'll remove as soon as possible
 
 [My Twitter](https://twitter.com/onhernandes)
-[The bot's account](https://twitter.com/)
+
+[The bot's account](https://twitter.com/capivara_bot)
