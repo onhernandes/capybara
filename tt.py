@@ -1,6 +1,4 @@
 from twitter import *
-from PIL import Image
-from io import BytesIO
 from urllib import request
 import os
 
