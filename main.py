@@ -6,15 +6,20 @@ import sys
 import os
 import json
 
-FLICKR_KEY = os.environ.get("FLICKR_CAPYBARA_KEY", False)
-TT_CONSUMER = os.environ.get("TWITTER_CAPYBARA_CONSUMER_KEY", False)
-TT_SECRET = os.environ.get("TWITTER_CAPYBARA_SECRET", False)
+FLICKR_KEY = os.environ.get("FLICKR_CAPYBARA_KEY")
+TT_CONSUMER = os.environ.get("TWITTER_CAPYBARA_CONSUMER_KEY")
+TT_SECRET = os.environ.get("TWITTER_CAPYBARA_SECRET")
 
-if not FLICKR_KEY or not TT_CONSUMER or not TT_SECRET:
-    print("You must set the right env varibles")
-    print("Set $FLICKR_CAPYBARA_KEY for Flickr API")
-    print("Set $TWITTER_CAPYBARA_CONSUMER_KEY for Twitter API")
-    print("Set $TWITTER_CAPYBARA_SECRET for Twitter API")
+if not all((FLICKR_KEY, TT_CONSUMER, TT_SECRET)):
+    print(
+        """
+        You must set the right env varibles.
+
+        - Set $FLICKR_CAPYBARA_KEY for Flickr API
+        - Set $TWITTER_CAPYBARA_CONSUMER_KEY for Twitter API
+        - Set $TWITTER_CAPYBARA_SECRET for Twitter API
+        """
+    )
     sys.exit()
 
 mongoengine.connect('capybara')
