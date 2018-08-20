@@ -24,6 +24,13 @@ if not all((FLICKR_KEY, TT_CONSUMER, TT_SECRET)):
 
 mongoengine.connect('capybara')
 
+def request_photos(page = 1):
+    photos = get_flickr_photos(page)
+    photos = photos["photos"]["photo"]
+    photos = iter(photos)
+
+    return photos
+
 def get_flickr_photos(page = 1):
     r = urllib.urlopen("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=%s&tags=capybara&format=json&nojsoncallback=1&page=%s" % (FLICKR_KEY, page))
     return json.loads(r.read())
@@ -34,19 +41,16 @@ def make_photo_url(farm, server, id, secret):
 def main():
     """Does the job"""
     keep = True
-    photos = get_flickr_photos()
-    photos = photos["photos"]["photo"]
-    photos = iter(photos)
+    photos = request_photos()
     page = 1
     t = False
+
 
     while keep is True:
         p = next(photos, False)
 
         if p is False:
-            photos = get_flickr_photos(page + 1)
-            photos = photos["photos"]["photo"]
-            photos = iter(photos)
+            photos = request_photos(page + 1)
             continue
 
         trial = Photo.objects(flickr=p["id"]).first()
@@ -67,4 +71,3 @@ def main():
 
 if __name__ == "__main__":
     print(main())
-
