@@ -2,7 +2,9 @@ import yaml
 import sys
 import os
 
-with open("./config.yaml", "r") as conf:
+current_dir = os.path.dirname(os.path.realpath(__file__))
+
+with open(os.path.join(current_dir, "config.yaml"), "r") as conf:
     y = yaml.load(conf)
 
 def get(k):
