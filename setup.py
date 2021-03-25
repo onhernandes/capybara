@@ -10,7 +10,7 @@ setup(
     description="Twitter bot for posting photos",
     long_description=open("README.md").read(),
     install_requires=[
-        "PyYAML == 3.13",
+        "PyYAML == 5.4",
         "mongoengine == 0.15.3",
         "twitter == 1.18.0"
     ],
